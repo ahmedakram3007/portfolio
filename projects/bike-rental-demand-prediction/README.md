@@ -5,6 +5,8 @@ Regression model predicting bike rental demand from historical usage and weather
 ## What it does
 Builds an end-to-end pipeline: data cleaning, feature preparation, model training and evaluation, using train/test validation to check the model generalises rather than memorising the training data.
 
+Worked on a structured dataset of 10,000 hourly rental records with weather, temperature, and wind-level features. Removed irrelevant fields (e.g. record ID) and filtered to a single city for consistency, then engineered the hourly variable into a binary day/night indicator. Split 80:20 into train/test sets and applied Min-Max normalisation independently to features and labels. Modelled with multivariate Linear Regression, evaluated with Root Mean Squared Error (RMSE) on the normalised [0–1] range.
+
 ## Tools
 Python, Pandas, Scikit-learn
 
@@ -14,4 +16,4 @@ Python, Pandas, Scikit-learn
 - [`Bike Rental Demand Prediction DS.docx`](Bike%20Rental%20Demand%20Prediction%20DS.docx) — written report
 
 ## Notes
-_TODO (Ahmed): add notes on what worked, what you'd try next, and any evaluation metric (RMSE, R-squared, etc.) — only once you have the real figure recorded._
+_TODO (Ahmed): add the actual RMSE value once you have it recorded, plus what you'd try next._
