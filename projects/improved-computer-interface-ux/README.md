@@ -10,12 +10,11 @@ Figma, Draw.io
 
 ## Images
 
-![MyBangor portal homepage, analysed as part of the market research stage](images/mybangor-portal-homepage.png)
 ![Figma wireframes for the MyBangor smartwatch companion app](images/figma-smartwatch-wireframes.png)
 
 ## Files
 - [`UI UX FInal Assignment.pdf`](UI%20UX%20FInal%20Assignment.pdf) — the full write-up: research, design decisions, and prototype
-- [`images/`](images) — the MyBangor portal screenshot referenced in the market research stage, and the Figma wireframes for the smartwatch companion app
+- [`images/`](images) — the Figma wireframes for the smartwatch companion app
 
 ## Notes
 _TODO (Ahmed): add what usability principles you applied and what you'd test next with real users._
