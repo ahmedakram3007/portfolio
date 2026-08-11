@@ -1,6 +1,6 @@
 # Fantasy Shop — AI-Driven NPC Merchant
 
-A real-time game system where an NPC merchant's dialogue and behaviour are driven by an external machine learning service, built as an MSc individual project.
+A real-time game system where an NPC merchant's dialogue and behaviour are driven by an external machine learning service.
 
 ## What it does
 Connects a Unity game interface to an external ML service, with fallback logic so the NPC keeps behaving sensibly if the service is slow or unavailable.
