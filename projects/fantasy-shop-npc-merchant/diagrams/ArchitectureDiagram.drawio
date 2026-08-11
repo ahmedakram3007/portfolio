@@ -1,0 +1,49 @@
+<mxfile host="app.diagrams.net" modified="2025-11-20T12:00:00.000Z" agent="5.0" version="20.1.0" editor="diagramly">
+  <diagram id="AI_Merchant_Arch" name="System Architecture">
+    <mxGraphModel dx="1100" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Unity -->
+        <mxCell id="unity" value="Unity Client&#10;(C# Scripts, UI, NPC Trigger)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf" vertex="1" parent="1">
+          <mxGeometry x="100" y="200" width="200" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- Flask -->
+        <mxCell id="flask" value="Flask Backend&#10;(Python Server, Memory System)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00" vertex="1" parent="1">
+          <mxGeometry x="400" y="200" width="220" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- Memory -->
+        <mxCell id="memory" value="Long-Term Memory&#10;(JSONL Files on Disk)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366" vertex="1" parent="1">
+          <mxGeometry x="400" y="350" width="220" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Cohere -->
+        <mxCell id="cohere" value="Cohere API&#10;(Command R+)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450" vertex="1" parent="1">
+          <mxGeometry x="700" y="120" width="200" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Ollama -->
+        <mxCell id="ollama" value="Local Llama via Ollama" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6" vertex="1" parent="1">
+          <mxGeometry x="700" y="280" width="200" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Connections -->
+        <mxCell id="u2f" edge="1" parent="1" source="unity" target="flask"
+          style="endArrow=block;strokeColor=#000000;rounded=1;html=1;"/>
+
+        <mxCell id="f2mem" edge="1" parent="1" source="flask" target="memory"
+          style="endArrow=block;strokeColor=#000000;rounded=1;html=1;"/>
+
+        <mxCell id="f2coh" edge="1" parent="1" source="flask" target="cohere"
+          style="endArrow=block;strokeColor=#000000;rounded=1;html=1;"/>
+
+        <mxCell id="f2oll" edge="1" parent="1" source="flask" target="ollama"
+          style="endArrow=block;strokeColor=#000000;rounded=1;html=1;"/>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
