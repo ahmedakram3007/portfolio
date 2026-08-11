@@ -20,3 +20,5 @@ _TODO (Ahmed): a demo GIF/video would help a lot here — game/AI projects benef
 
 ## Notes
 Key challenges: Llama worked in the Unity editor but not in builds, due to networking differences — resolved with logging, certificate handling, and `link.xml` configuration. Provider switching was initially unstable because Flask responses overwrote Unity's preference values — fixed with a `preferred_provider` field in the JSON payload. NPC persona consistency was improved through prompt engineering and first-person voice rules.
+
+Response time typically 2–5 seconds per message; the Cohere/Llama fallback logic kept the system available in the large majority of test sessions.

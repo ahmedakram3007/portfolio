@@ -119,8 +119,10 @@
 
   /* PROJECTS */
   .project-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(380px,1fr)); gap:20px;}
-  .project-card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:22px 24px; transition:border-color .15s, transform .15s;}
+  .project-card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; transition:border-color .15s, transform .15s;}
   .project-card:hover{border-color:var(--teal); transform:translateY(-2px);}
+  .project-card-body{padding:22px 24px;}
+  .project-thumb{display:block; width:100%; aspect-ratio:16/10; object-fit:cover; border-bottom:1px solid var(--line); background:var(--bg-alt);}
   .project-card h3{font-size:16.5px; margin-bottom:8px;}
   .project-card p{font-size:14.5px; color:var(--ink); margin:0 0 14px;}
   .project-tags{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px;}
@@ -265,31 +267,43 @@
     <div class="project-grid">
 
       <div class="project-card">
+        <img class="project-thumb" src="assets/projects/bike-rental-demand-prediction.jpg" alt="Bike rental demand prediction project screenshot" loading="lazy">
+        <div class="project-card-body">
         <h3>Bike rental demand prediction</h3>
         <p>End-to-end regression pipeline predicting rental demand from historical usage and weather data, evaluated with train/test validation.</p>
         <div class="project-tags"><span>Python</span><span>Scikit-learn</span><span>Regression</span></div>
         <a class="project-link" href="https://github.com/ahmedakram3007/portfolio/tree/main/projects/bike-rental-demand-prediction">View repository →</a>
+        </div>
       </div>
 
       <div class="project-card">
+        <img class="project-thumb" src="assets/projects/fantasy-shop-npc-merchant.jpg" alt="Fantasy Shop AI NPC merchant project screenshot" loading="lazy">
+        <div class="project-card-body">
         <h3>Fantasy Shop — AI NPC merchant</h3>
         <p>Real-time game system integrating an external ML service to drive NPC dialogue and behaviour, with fallback logic for reliability.</p>
         <div class="project-tags"><span>Unity (C#)</span><span>Python</span><span>AI integration</span></div>
         <a class="project-link" href="https://github.com/ahmedakram3007/portfolio/tree/main/projects/fantasy-shop-npc-merchant">View repository →</a>
+        </div>
       </div>
 
       <div class="project-card">
+        <img class="project-thumb" src="assets/projects/f1-nlp-corpus-analysis.jpg" alt="F1 events corpus NLP analysis project screenshot" loading="lazy">
+        <div class="project-card-body">
         <h3>F1 events corpus — NLP analysis</h3>
         <p>Scraped and cleaned a Wikipedia-derived text corpus spanning multiple Formula 1 seasons; applied entity recognition and text analysis to surface patterns.</p>
         <div class="project-tags"><span>Python</span><span>NLP</span><span>Web scraping</span></div>
         <a class="project-link" href="https://github.com/ahmedakram3007/portfolio/tree/main/projects/f1-nlp-corpus-analysis">View repository →</a>
+        </div>
       </div>
 
       <div class="project-card">
+        <img class="project-thumb" src="assets/projects/improved-computer-interface-ux.jpg" alt="Improved computer interface UX design project screenshot" loading="lazy">
+        <div class="project-card-body">
         <h3>Improved computer interface — UX design</h3>
         <p>Redesigned a computer interface applying UX research and usability principles to reduce task steps and improve interaction efficiency.</p>
         <div class="project-tags"><span>Figma</span><span>UX research</span><span>Prototyping</span></div>
         <a class="project-link" href="https://github.com/ahmedakram3007/portfolio/tree/main/projects/improved-computer-interface-ux">View repository →</a>
+        </div>
       </div>
 
     </div>
