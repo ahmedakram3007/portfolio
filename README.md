@@ -2,6 +2,8 @@
 
 MSc Artificial Intelligence and Data Science (Bangor University) | Data Analyst & IT Support experience (Imad Company, 2022–2024)
 
+Open to Data Analyst, Data Scientist and ML Engineer roles (also interested in AI Architect opportunities) — fully authorised to work in the UK.
+
 Portfolio: https://ahmedakram3007.github.io/portfolio/
 GitHub: https://github.com/ahmedakram3007
 LinkedIn: https://www.linkedin.com/in/ahmed-akram-65b013b6/
