@@ -1,1 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ahmed Akram — Data Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF8F4;
+    --bg-alt:#F0EDE4;
+    --ink:#14191F;
+    --ink-soft:#5B6472;
+    --line:#DBD5C6;
+    --teal:#0E7C7B;
+    --teal-dark:#0A5958;
+    --amber:#D98A2B;
+    --card:#FFFFFF;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.6;
+  }
+  h1,h2,h3{font-family:'Space Grotesk', sans-serif; margin:0;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  a{color:var(--teal-dark);}
+  .wrap{max-width:920px; margin:0 auto; padding:0 28px;}
 
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(250,248,244,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; padding-top:14px; padding-bottom:14px;}
+  .nav-name{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16px;}
+  .nav-links{display:flex; gap:26px; list-style:none; margin:0; padding:0;}
+  .nav-links li{margin-right:26px;}
+  .nav-links li:last-child{margin-right:0;}
+  .nav-links a{color:var(--ink); text-decoration:none; font-size:14px; font-weight:500;}
+  .nav-links a:hover{color:var(--teal-dark);}
+  @media (max-width:640px){ .nav-links{gap:14px;} .nav-links a{font-size:12.5px;} }
+
+  /* HERO */
+  header.hero{padding:72px 0 56px; border-bottom:1px solid var(--line);}
+  .hero-grid{display:grid; grid-template-columns:1fr 260px; gap:40px; align-items:center;}
+  @media (max-width:760px){ .hero-grid{grid-template-columns:1fr;} }
+  .eyebrow{font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--teal-dark); letter-spacing:.02em; margin-bottom:14px;}
+  .hero h1{font-size:44px; font-weight:700; line-height:1.08; letter-spacing:-.01em;}
+  .hero p.role{font-size:19px; color:var(--ink-soft); margin-top:10px;}
+  .hero p.pitch{margin-top:20px; font-size:16px; max-width:52ch; color:var(--ink);}
+  .hero-actions{display:flex; gap:12px; margin-top:28px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:10px 18px; border-radius:8px; font-size:14px; font-weight:600;
+    text-decoration:none; border:1px solid var(--ink);
+  }
+  .btn-primary{background:var(--ink); color:var(--bg);}
+  .btn-ghost{background:transparent; color:var(--ink); border:1px solid var(--line);}
+
+  .monogram-block{
+    width:100%; aspect-ratio:1/1; border-radius:14px;
+    background:var(--teal);
+    display:flex; align-items:center; justify-content:center;
+    position:relative; overflow:hidden;
+  }
+  .monogram-block span{
+    font-family:'Space Grotesk',sans-serif; font-weight:700; color:#EAF6F4; font-size:74px;
+  }
+  .monogram-note{
+    position:absolute; bottom:10px; left:10px; right:10px;
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#CDECE8; opacity:.85;
+  }
+
+  .sparkline-wrap{margin-top:38px;}
+  .sparkline-wrap svg{width:100%; height:auto; display:block;}
+  .spark-path{fill:none; stroke:var(--teal-dark); stroke-width:2.2; stroke-linecap:round; stroke-dasharray:520; stroke-dashoffset:520; animation:draw 1.6s ease forwards .3s;}
+  .spark-dot{opacity:0; animation:fadein .5s ease forwards 1.7s;}
+  @keyframes draw{to{stroke-dashoffset:0;}}
+  @keyframes fadein{to{opacity:1;}}
+  @media (prefers-reduced-motion: reduce){
+    .spark-path{stroke-dasharray:none; stroke-dashoffset:0; animation:none;}
+    .spark-dot{opacity:1; animation:none;}
+  }
+
+  section{padding:56px 0;}
+  section.alt{background:var(--bg-alt);}
+  .section-head{display:flex; align-items:baseline; gap:14px; margin-bottom:28px;}
+  .section-head .tag{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-soft);}
+  .section-head h2{font-size:24px;}
+
+  /* SKILLS */
+  .skill-groups{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:22px;}
+  .skill-group h3{font-size:13px; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-soft); font-family:'IBM Plex Sans',sans-serif; font-weight:600; margin-bottom:10px;}
+  .chip-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{
+    font-family:'IBM Plex Mono',monospace; font-size:12.5px;
+    background:var(--card); border:1px solid var(--line); border-radius:6px;
+    padding:5px 10px; color:var(--ink);
+  }
+
+  /* EXPERIENCE */
+  .exp-card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:26px 28px;}
+  .exp-top{display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap;}
+  .exp-top h3{font-size:18px;}
+  .exp-dates{font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--ink-soft); white-space:nowrap;}
+  .exp-org{color:var(--ink-soft); margin-top:2px; font-size:14.5px;}
+  .exp-card ul{margin:16px 0 0; padding-left:20px;}
+  .exp-card li{margin-bottom:8px; font-size:15px;}
+
+  /* PROJECTS */
+  .project-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(380px,1fr)); gap:20px;}
+  .project-card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:22px 24px; transition:border-color .15s, transform .15s;}
+  .project-card:hover{border-color:var(--teal); transform:translateY(-2px);}
+  .project-card h3{font-size:16.5px; margin-bottom:8px;}
+  .project-card p{font-size:14.5px; color:var(--ink); margin:0 0 14px;}
+  .project-tags{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px;}
+  .project-tags span{font-family:'IBM Plex Mono',monospace; font-size:11px; background:var(--bg-alt); border:1px solid var(--line); border-radius:5px; padding:3px 8px; color:var(--ink-soft);}
+  .project-link{font-size:13px; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:5px;}
+
+  /* EDUCATION */
+  .edu-item{display:grid; grid-template-columns:1fr auto; gap:12px; padding:18px 0; border-bottom:1px solid var(--line);}
+  .edu-item:last-child{border-bottom:none;}
+  .edu-item h3{font-size:16px;}
+  .edu-item p{font-size:13.5px; color:var(--ink-soft); margin:4px 0 0;}
+  .edu-item .dates{font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--ink-soft); white-space:nowrap;}
+
+  /* CONTACT / FOOTER */
+  footer{padding:56px 0 72px; border-top:1px solid var(--line);}
+  .contact-row{display:flex; flex-wrap:wrap; gap:28px; align-items:center; justify-content:space-between;}
+  .contact-links{display:flex; gap:20px; flex-wrap:wrap;}
+  .contact-links a{font-size:14.5px; font-weight:500; text-decoration:none; display:inline-flex; align-items:center; gap:7px; margin-right:20px;}
+  .contact-links a:last-child{margin-right:0;}
+  .foot-note{margin-top:34px; font-size:12.5px; color:var(--ink-soft);}
+
+  :focus-visible{outline:2px solid var(--teal-dark); outline-offset:2px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="nav-name">Ahmed Akram</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="about">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">// data analyst — ai & data science</div>
+      <h1>Ahmed Akram</h1>
+      <p class="role">Turning raw data into decisions that hold up.</p>
+      <p class="pitch">MSc in Artificial Intelligence and Data Science, plus two years building SQL/ETL pipelines and BI dashboards in industry. Based in Colwyn Bay, UK — open to data analyst roles.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="mailto:ahmedakram3007@gmail.com">Get in touch</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/ahmed-akram-65b013b6/">LinkedIn</a>
+        <a class="btn btn-ghost" href="https://github.com/ahmedakram3007">GitHub</a>
+      </div>
+    </div>
+    <div>
+      <div class="monogram-block">
+        <span>AA</span>
+        <div class="monogram-note">photo coming soon</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap sparkline-wrap">
+    <svg viewBox="0 0 860 120" preserveAspectRatio="none" role="img" aria-label="Illustrative upward trend line, representing dashboard and analytics work">
+      <path class="spark-path" d="M10,95 L120,80 L230,88 L340,55 L450,62 L560,30 L670,40 L780,15 L850,20" />
+      <circle class="spark-dot" cx="850" cy="20" r="5" fill="#0E7C7B" />
+    </svg>
+  </div>
+</header>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">01</span>
+      <h2>Core skills</h2>
+    </div>
+    <div class="skill-groups">
+      <div class="skill-group">
+        <h3>Languages</h3>
+        <div class="chip-row">
+          <span class="chip">SQL</span>
+          <span class="chip">Python</span>
+          <span class="chip">Pandas</span>
+          <span class="chip">NumPy</span>
+          <span class="chip">Scikit-learn</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>BI &amp; Visualisation</h3>
+        <div class="chip-row">
+          <span class="chip">Power BI</span>
+          <span class="chip">Qlik Sense</span>
+          <span class="chip">Excel</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Data engineering</h3>
+        <div class="chip-row">
+          <span class="chip">ETL pipelines</span>
+          <span class="chip">SQL Server</span>
+          <span class="chip">Data cleaning</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>ML &amp; AI</h3>
+        <div class="chip-row">
+          <span class="chip">TensorFlow</span>
+          <span class="chip">NLTK</span>
+          <span class="chip">Regression modelling</span>
+          <span class="chip">NLP</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">02</span>
+      <h2>Experience</h2>
+    </div>
+    <div class="exp-card">
+      <div class="exp-top">
+        <h3>Data Analyst &amp; IT Support</h3>
+        <span class="exp-dates">Jun 2022 – Sept 2024</span>
+      </div>
+      <div class="exp-org">Imad Company for Trading &amp; Contracting, Saudi Arabia</div>
+      <ul>
+        <li>Designed and implemented SQL queries and ETL workflows to extract and transform data across multiple systems, replacing manual reporting processes with automated pipelines.</li>
+        <li>Built interactive Power BI and Qlik Sense dashboards used regularly by managers and department leads to track KPIs and support day-to-day operational decisions.</li>
+        <li>Maintained enterprise SQL Server databases, improving data accuracy by 60% through validation and cleansing processes.</li>
+        <li>Supported IT operations and quality assurance in line with company procedures, contributing to consistent system reliability.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">03</span>
+      <h2>Projects</h2>
+    </div>
+    <div class="project-grid">
+
+      <div class="project-card">
+        <h3>Bike rental demand prediction</h3>
+        <p>End-to-end regression pipeline predicting rental demand from historical usage and weather data, evaluated with train/test validation.</p>
+        <div class="project-tags"><span>Python</span><span>Scikit-learn</span><span>Regression</span></div>
+        <a class="project-link" href="https://github.com/ahmedakram3007/portfolio/tree/main/projects/bike-rental-demand-prediction">View repository →</a>
+      </div>
+
+      <div class="project-card">
+        <h3>Fantasy Shop — AI NPC merchant</h3>
+        <p>Real-time game system integrating an external ML service to drive NPC dialogue and behaviour, with fallback logic for reliability.</p>
+        <div class="project-tags"><span>Unity (C#)</span><span>Python</span><span>AI integration</span></div>
+        <a class="project-link" href="https://github.com/ahmedakram3007/portfolio/tree/main/projects/fantasy-shop-npc-merchant">View repository →</a>
+      </div>
+
+      <div class="project-card">
+        <h3>F1 events corpus — NLP analysis</h3>
+        <p>Scraped and cleaned a Wikipedia-derived text corpus spanning multiple Formula 1 seasons; applied entity recognition and text analysis to surface patterns.</p>
+        <div class="project-tags"><span>Python</span><span>NLP</span><span>Web scraping</span></div>
+        <a class="project-link" href="https://github.com/ahmedakram3007/portfolio/tree/main/projects/f1-nlp-corpus-analysis">View repository →</a>
+      </div>
+
+      <div class="project-card">
+        <h3>Improved computer interface — UX design</h3>
+        <p>Redesigned a computer interface applying UX research and usability principles to reduce task steps and improve interaction efficiency.</p>
+        <div class="project-tags"><span>Figma</span><span>UX research</span><span>Prototyping</span></div>
+        <a class="project-link" href="https://github.com/ahmedakram3007/portfolio/tree/main/projects/improved-computer-interface-ux">View repository →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="education">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">04</span>
+      <h2>Education</h2>
+    </div>
+    <div class="edu-item">
+      <div>
+        <h3>MSc Artificial Intelligence</h3>
+        <p>Bangor University, Wales — Data Science, ML, NLP, Research Methods, Data Visualisation</p>
+      </div>
+      <span class="dates">Jan 2025 – Feb 2026</span>
+    </div>
+    <div class="edu-item">
+      <div>
+        <h3>B.Tech Electronics &amp; Communications</h3>
+        <p>RIT University, India — Programming, databases, software development foundations</p>
+      </div>
+      <span class="dates">2013 – 2017</span>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">05</span>
+      <h2>Contact</h2>
+    </div>
+    <div class="contact-row">
+      <p style="max-width:44ch; margin:0; color:var(--ink-soft);">Open to data analyst roles across the UK — happy to talk through any of the projects above in more detail.</p>
+      <div class="contact-links">
+        <a href="mailto:ahmedakram3007@gmail.com">ahmedakram3007@gmail.com</a>
+        <a href="https://www.linkedin.com/in/ahmed-akram-65b013b6/">LinkedIn</a>
+        <a href="https://github.com/ahmedakram3007">GitHub</a>
+      </div>
+    </div>
+    <p class="foot-note">Colwyn Bay, UK</p>
+  </div>
+</footer>
+
+</body>
+</html>
