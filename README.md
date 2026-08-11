@@ -1,8 +1,9 @@
-# Ahmed Akram — Data Analyst Projects
+# Ahmed Mohammed Amir — Data Analyst Projects
 
 MSc Artificial Intelligence and Data Science (Bangor University) | Data Analyst & IT Support experience (Imad Company, 2022–2024)
 
 Portfolio: https://ahmedakram3007.github.io/portfolio/
+GitHub: https://github.com/ahmedakram3007
 LinkedIn: https://www.linkedin.com/in/ahmed-akram-65b013b6/
 Contact: ahmedakram3007@gmail.com
 
