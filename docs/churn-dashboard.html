@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customer Churn Analysis — Ahmed Mohammed Amir</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF8F4;
+    --bg-alt:#F0EDE4;
+    --ink:#14191F;
+    --ink-soft:#5B6472;
+    --line:#DBD5C6;
+    --teal:#0E7C7B;
+    --teal-dark:#0A5958;
+    --amber:#D98A2B;
+    --card:#FFFFFF;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.6;
+  }
+  h1,h2,h3{font-family:'Space Grotesk', sans-serif; margin:0;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  a{color:var(--teal-dark);}
+  .wrap{max-width:980px; margin:0 auto; padding:0 28px;}
+
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(250,248,244,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; padding-top:14px; padding-bottom:14px;}
+  .nav-name{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16px; text-decoration:none; color:var(--ink);}
+  .nav-links{display:flex; gap:20px; list-style:none; margin:0; padding:0;}
+  .nav-links a{color:var(--ink); text-decoration:none; font-size:14px; font-weight:500;}
+  .nav-links a:hover{color:var(--teal-dark);}
+
+  header.hero{padding:52px 0 36px; border-bottom:1px solid var(--line);}
+  .eyebrow{font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--teal-dark); letter-spacing:.02em; margin-bottom:12px;}
+  .hero h1{font-size:34px; font-weight:700; line-height:1.15; letter-spacing:-.01em;}
+  .hero p.pitch{margin-top:14px; font-size:16px; max-width:68ch; color:var(--ink);}
+
+  section{padding:44px 0;}
+  section.alt{background:var(--bg-alt);}
+  .section-head{margin-bottom:22px;}
+  .section-head .tag{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-soft);}
+  .section-head h2{font-size:22px; margin-top:4px;}
+  .section-head p{color:var(--ink-soft); font-size:14.5px; margin:8px 0 0; max-width:70ch;}
+
+  /* KPI tiles */
+  .kpi-row{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px;}
+  .kpi{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:20px 22px;}
+  .kpi .label{font-size:13px; color:var(--ink-soft);}
+  .kpi .value{font-family:'Space Grotesk',sans-serif; font-size:30px; font-weight:700; margin-top:6px;}
+  .kpi .sub{font-size:12.5px; color:var(--ink-soft); margin-top:4px;}
+
+  /* chart cards */
+  .chart-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(420px,1fr)); gap:20px;}
+  .chart-card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:22px 24px;}
+  .chart-card h3{font-size:15.5px; margin-bottom:2px;}
+  .chart-card .chart-note{font-size:13px; color:var(--ink-soft); margin-bottom:14px;}
+  .bar-row{display:flex; align-items:center; gap:10px; margin-bottom:10px;}
+  .bar-label{width:150px; flex:0 0 auto; font-size:13px; color:var(--ink); text-align:right;}
+  .bar-track{flex:1; background:var(--bg-alt); border-radius:4px; height:22px; position:relative; overflow:hidden;}
+  .bar-fill{height:100%; border-radius:4px; background:var(--teal); display:flex; align-items:center;}
+  .bar-fill.amber{background:var(--amber);}
+  .bar-value{font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--ink); margin-left:8px; white-space:nowrap; min-width:44px;}
+
+  .flat-note{background:var(--bg-alt); border:1px solid var(--line); border-radius:var(--radius); padding:18px 20px; font-size:14.5px; color:var(--ink);}
+  .flat-note b{color:var(--teal-dark);}
+
+  table.metrics{width:100%; border-collapse:collapse; font-size:14px;}
+  table.metrics th, table.metrics td{text-align:left; padding:9px 10px; border-bottom:1px solid var(--line);}
+  table.metrics th{font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.03em; font-weight:500;}
+  table.metrics td.num{font-family:'IBM Plex Mono',monospace;}
+
+  .links-row{display:flex; gap:14px; flex-wrap:wrap; margin-top:16px;}
+  .links-row a{font-size:14px; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:6px; border:1px solid var(--line); border-radius:8px; padding:8px 14px; color:var(--ink);}
+  .links-row a:hover{border-color:var(--teal);}
+
+  footer{padding:40px 0 60px; border-top:1px solid var(--line); text-align:center;}
+  footer p{color:var(--ink-soft); font-size:13.5px;}
+
+  :focus-visible{outline:2px solid var(--teal-dark); outline-offset:2px;}
+
+  @media (max-width:640px){
+    .bar-label{width:100px; font-size:11.5px;}
+    .hero h1{font-size:26px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="nav-name" href="index.html">Ahmed Mohammed Amir</a>
+    <ul class="nav-links">
+      <li><a href="index.html#projects">← Back to portfolio</a></li>
+      <li><a href="https://github.com/ahmedakram3007/portfolio/tree/main/projects/customer-churn-analysis">GitHub</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">// data analyst project</div>
+    <h1>Customer Churn Analysis</h1>
+    <p class="pitch">SQL analysis and a predictive model on a 7,043-customer telecom dataset — identifying which customers are likely to leave, why, and where retention effort would actually pay off. Full SQL queries and the Python notebook are linked at the bottom.</p>
+  </div>
+</header>
+
+<section id="overview">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">01</span>
+      <h2>At a glance</h2>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi">
+        <div class="label">Total customers</div>
+        <div class="value">7,043</div>
+        <div class="sub">3 joined tables: customers, support interactions, satisfaction scores</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Overall churn rate</div>
+        <div class="value">26.5%</div>
+        <div class="sub">1,869 customers churned</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Monthly revenue at risk</div>
+        <div class="value">$139,131</div>
+        <div class="sub">30.5% of total monthly recurring revenue</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Best model ROC-AUC</div>
+        <div class="value">0.838</div>
+        <div class="sub">Random Forest, vs. 0.734 baseline accuracy</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="drivers">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">02</span>
+      <h2>What actually drives churn</h2>
+      <p>Churn rate broken out by five dimensions — SQL queries for each in <code class="mono">sql/analysis_queries.sql</code>.</p>
+    </div>
+    <div class="chart-grid">
+
+      <div class="chart-card">
+        <h3>By contract type</h3>
+        <div class="chart-note">The single strongest driver in this dataset.</div>
+        <div id="chart-contract"></div>
+      </div>
+
+      <div class="chart-card">
+        <h3>By tenure</h3>
+        <div class="chart-note">New customers are by far the highest risk.</div>
+        <div id="chart-tenure"></div>
+      </div>
+
+      <div class="chart-card">
+        <h3>By internet service</h3>
+        <div class="chart-note">Fiber customers churn over 5x more than customers with no internet service.</div>
+        <div id="chart-internet"></div>
+      </div>
+
+      <div class="chart-card">
+        <h3>By payment method</h3>
+        <div class="chart-note">Manual payment methods correlate strongly with churn.</div>
+        <div id="chart-payment"></div>
+      </div>
+
+      <div class="chart-card" style="grid-column:1 / -1;">
+        <h3>By add-on services (Online Security + Tech Support)</h3>
+        <div class="chart-note">Customers with both add-ons churn at roughly a fifth the rate of customers with neither — the clearest actionable lever in the data.</div>
+        <div id="chart-addons"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="non-drivers">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">03</span>
+      <h2>What doesn't predict churn — a genuinely useful negative result</h2>
+    </div>
+    <div class="flat-note">
+      Customer <b>satisfaction score</b> (1–5) and <b>support interaction sentiment</b> both show almost no correlation with churn here — churn rate stays flat at roughly <b>25–28%</b> regardless of satisfaction score, and regardless of whether a customer's support interactions were positive, neutral, or negative. That's a slightly counter-intuitive finding worth taking seriously: it suggests this business's churn problem is <b>structural</b> — contract terms, price, and tenure — rather than a service-quality problem. A retention strategy built around "improve support quality" would likely miss the mark; one built around contract incentives and onboarding would not.
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="model">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">04</span>
+      <h2>Predictive model</h2>
+      <p>Two classifiers on an 80/20 train/test split, evaluated against a 73.4% baseline (always predicting "no churn").</p>
+    </div>
+
+    <table class="metrics">
+      <thead>
+        <tr><th>Model</th><th>Accuracy</th><th>Precision</th><th>Recall</th><th>F1</th><th>ROC-AUC</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Logistic Regression</td>
+          <td class="num">0.804</td>
+          <td class="num">0.648</td>
+          <td class="num">0.575</td>
+          <td class="num">0.609</td>
+          <td class="num">0.836</td>
+        </tr>
+        <tr>
+          <td>Random Forest (balanced)</td>
+          <td class="num">0.739</td>
+          <td class="num">0.506</td>
+          <td class="num">0.802</td>
+          <td class="num">0.621</td>
+          <td class="num">0.838</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:14px; color:var(--ink-soft); margin-top:14px; max-width:72ch;">
+      For a retention use case, recall usually matters more than precision — a missed churner is a lost customer, a false positive just means an unnecessary retention offer. The class-balanced Random Forest trades precision for recall accordingly.
+    </p>
+
+    <div class="chart-card" style="margin-top:20px;">
+      <h3>Top model features</h3>
+      <div class="chart-note">Random Forest feature importances — confirms the SQL findings above: tenure, contract length, and charges dominate.</div>
+      <div id="chart-features"></div>
+    </div>
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="wrap">
+    <p>Full write-up, SQL, and the executed notebook (with charts) are in the project folder on GitHub.</p>
+    <div class="links-row" style="justify-content:center;">
+      <a href="https://github.com/ahmedakram3007/portfolio/tree/main/projects/customer-churn-analysis">Project folder →</a>
+      <a href="https://github.com/ahmedakram3007/portfolio/blob/main/projects/customer-churn-analysis/sql/analysis_queries.sql">SQL queries →</a>
+      <a href="https://github.com/ahmedakram3007/portfolio/blob/main/projects/customer-churn-analysis/notebook/churn_eda_and_model.ipynb">Notebook →</a>
+      <a href="index.html">← Back to portfolio</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function renderBarChart(containerId, data, opts) {
+  opts = opts || {};
+  var maxVal = opts.max || Math.max.apply(null, data.map(function(d){return d.value;}));
+  var container = document.getElementById(containerId);
+  data.forEach(function(d) {
+    var row = document.createElement('div');
+    row.className = 'bar-row';
+
+    var label = document.createElement('div');
+    label.className = 'bar-label';
+    label.textContent = d.label;
+    row.appendChild(label);
+
+    var track = document.createElement('div');
+    track.className = 'bar-track';
+    var fill = document.createElement('div');
+    fill.className = 'bar-fill' + (d.highlight ? ' amber' : '');
+    var pct = Math.max(2, (d.value / maxVal) * 100);
+    fill.style.width = pct + '%';
+    track.appendChild(fill);
+    row.appendChild(track);
+
+    var value = document.createElement('div');
+    value.className = 'bar-value';
+    value.textContent = opts.suffix ? (d.value + opts.suffix) : d.value;
+    row.appendChild(value);
+
+    container.appendChild(row);
+  });
+}
+
+renderBarChart('chart-contract', [
+  {label: 'Month-to-month', value: 42.7, highlight: true},
+  {label: 'One year', value: 11.3},
+  {label: 'Two year', value: 2.8}
+], {suffix: '%', max: 50});
+
+renderBarChart('chart-tenure', [
+  {label: '0–6 months', value: 52.9, highlight: true},
+  {label: '7–12 months', value: 35.9},
+  {label: '13–24 months', value: 28.7},
+  {label: '25–48 months', value: 20.4},
+  {label: '49+ months', value: 9.5}
+], {suffix: '%', max: 55});
+
+renderBarChart('chart-internet', [
+  {label: 'Fiber optic', value: 41.9, highlight: true},
+  {label: 'DSL', value: 19.0},
+  {label: 'No internet', value: 7.4}
+], {suffix: '%', max: 45});
+
+renderBarChart('chart-payment', [
+  {label: 'Electronic check', value: 45.3, highlight: true},
+  {label: 'Mailed check', value: 19.1},
+  {label: 'Bank transfer (auto)', value: 16.7},
+  {label: 'Credit card (auto)', value: 15.2}
+], {suffix: '%', max: 48});
+
+renderBarChart('chart-addons', [
+  {label: 'Neither add-on', value: 49.0, highlight: true},
+  {label: 'Tech Support only', value: 22.3},
+  {label: 'Online Security only', value: 21.3},
+  {label: 'Both add-ons', value: 9.0}
+], {suffix: '%', max: 52});
+
+renderBarChart('chart-features', [
+  {label: 'Tenure', value: 17.6, highlight: true},
+  {label: 'Total charges', value: 13.3},
+  {label: 'Two-year contract', value: 12.9},
+  {label: 'Monthly charges', value: 8.3},
+  {label: 'Fiber internet', value: 7.7},
+  {label: 'Electronic check', value: 6.0},
+  {label: 'One-year contract', value: 4.7}
+], {suffix: '%', max: 20});
+</script>
+
+</body>
+</html>

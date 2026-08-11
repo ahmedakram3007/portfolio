@@ -13,6 +13,7 @@ Contact: ahmedakram3007@gmail.com
 
 | Project | Description | Tools |
 |---|---|---|
+| [Customer Churn Analysis](projects/customer-churn-analysis) — [live dashboard](https://ahmedakram3007.github.io/portfolio/churn-dashboard.html) | SQL analysis across 3 joined tables + a churn prediction model | SQL, Python, Scikit-learn |
 | [Bike Rental Demand Prediction](projects/bike-rental-demand-prediction) | Regression pipeline predicting rental demand from usage and weather data | Python, Scikit-learn |
 | [Fantasy Shop — AI NPC Merchant](projects/fantasy-shop-npc-merchant) | Real-time game system integrating an external ML service for NPC behaviour | Unity (C#), Python |
 | [F1 Events Corpus — NLP Analysis](projects/f1-nlp-corpus-analysis) | NLP analysis of a scraped Wikipedia corpus of Formula 1 events | Python, NLP |
