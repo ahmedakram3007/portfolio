@@ -6,7 +6,7 @@ Open to Data Analyst, Data Scientist and ML Engineer roles (also interested in A
 
 Portfolio: https://ahmedakram3007.github.io/portfolio/
 GitHub: https://github.com/ahmedakram3007
-LinkedIn: https://www.linkedin.com/in/ahmed-akram-65b013b6/
+LinkedIn: https://www.linkedin.com/in/ahmed-akram-bangor/
 Contact: ahmedakram3007@gmail.com
 
 ## Projects
